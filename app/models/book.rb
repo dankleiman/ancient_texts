@@ -6,8 +6,10 @@ class Book < ActiveRecord::Base
     # expects text file with book number in title
     # grab title, author, and content for book
     # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
-    start = "START OF THE PROJECT GUTENBERG EBOOK"
-    ending = "END OF THE PROJECT GUTENBERG EBOOK"
+    start = "***START OF TH"
+    # start = "Produced by Jonathan Ingram"
+    # ending = "End of the Project Gutenberg"
+    ending = "***END OF THE PROJECT GUTENBERG"
     text = ""
     book_number = text_file.match(/pg(.*).txt/)[1]
     capture = false
@@ -19,7 +21,8 @@ class Book < ActiveRecord::Base
     File.open(text_file).each do |line|
       @title = line.split("Title: ").last if line.start_with?("Title:")
       @author = line.split("Author: ").last if line.start_with?("Author:")
-      if !(line =~ /#{start}.+$/).nil?
+      if line.start_with?(start)
+        @first_line = line
         capture = true
         capturing += 1
       end
@@ -27,12 +30,13 @@ class Book < ActiveRecord::Base
         puts "Capturing: #{line}"
         text += line
       end
-      capture = false if !(line =~ /#{ending}.+$/).nil?
+      if line.start_with?(ending)
+        capture = false
+        @last_line = line
+      end
     end
-    # first_line = text.match(/(\*\*\*.*\*\*\*$)/)[1]
-    # last_line = text.match(/(\*\*\*.*\*\*\*$)/)[2]
-    # text.slice!(first_line)
-    # text.slice!(last_line)
+    text.slice!(@first_line)
+    text.slice!(@last_line)
     text.strip!
 
     # save book and author info
