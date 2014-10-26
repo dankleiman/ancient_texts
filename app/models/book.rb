@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
   belongs_to :author
-  has_many :sections
+  has_many :sections, dependent: :destroy
 
   def self.create_from_txt!(text_file)
     # expects text file with book number in title
