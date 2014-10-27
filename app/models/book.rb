@@ -6,10 +6,10 @@ class Book < ActiveRecord::Base
     # expects text file with book number in title
     # grab title, author, and content for book
     # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
-    start = "***START OF TH"
+    start = "*** START OF TH"
     # start = "Produced by Jonathan Ingram"
-    # ending = "End of the Project Gutenberg"
-    ending = "***END OF THE PROJECT GUTENBERG"
+    ending = "End of the Project Gutenberg"
+    # ending = "***END OF THE PROJECT GUTENBERG"
     text = ""
     book_number = text_file.match(/pg(.*).txt/)[1]
     capture = false
