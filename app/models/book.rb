@@ -1,6 +1,12 @@
 class Book < ActiveRecord::Base
+  include FriendlyId
+  friendly_id :author_and_title, use: [:slugged, :finders]
   belongs_to :author
   has_many :sections, dependent: :destroy
+
+  def author_and_title
+    "#{author.full_name} #{title}"
+  end
 
   def self.create_from_txt!(text_file)
     # expects text file with book number in title
