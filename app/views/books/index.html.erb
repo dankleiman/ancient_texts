@@ -1,6 +1,6 @@
 <h1>Books</h1>
 <% @books.each do |book| %>
   <ul>
-    <li><%= link_to(book.title, book_path(book) )%></li>
+    <li><%= link_to("#{book.title} by #{book.author.full_name}", book_path(book) )%></li>
   </ul>
 <% end %>
