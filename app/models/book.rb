@@ -12,15 +12,14 @@ class Book < ActiveRecord::Base
     # expects text file with book number in title
     # grab title, author, and content for book
     # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
-    start = "*** START OF TH"
+    # start = "*** START OF TH"
     # start = "Produced by Jonathan Ingram"
+    start = "[Illustration: The Jade Flute--Chinese Poems in Prose]"
     ending = "End of the Project Gutenberg"
-    # ending = "***END OF THE PROJECT GUTENBERG"
     text = ""
     book_number = text_file.match(/pg(.*).txt/)[1]
     capture = false
     puts "Opening source file: #{text_file}"
-    puts start
     @title = ''
     @author = ''
     capturing = 0
@@ -33,7 +32,6 @@ class Book < ActiveRecord::Base
         capturing += 1
       end
       if capture && capturing == 1
-        puts "Capturing: #{line}"
         text += line
       end
       if line.start_with?(ending)
@@ -49,8 +47,11 @@ class Book < ActiveRecord::Base
     Book.transaction do
       begin
         author = Author.find_or_create_by(full_name: @author.strip)
-        book = Book.find_or_create_by(title: @title.strip)
-        book.update_attributes(author: author, content: text, gutenberg_id: book_number.to_i)
+        puts "AUTHOR: #{author.full_name}"
+        book = Book.find_or_create_by(title: @title.strip, author: author)
+        puts "BOOK: #{book.title}"
+        book.update_attributes(content: text, gutenberg_id: book_number.to_i)
+        book.regenerate_sections!
         puts "Created #{book.title} by #{book.author.full_name}"
       rescue => e
         raise e.message
@@ -116,7 +117,6 @@ class Book < ActiveRecord::Base
             end
           else
             section.save!
-            puts "CREATED SECTION #{position}"
             position += 1
             section = self.sections.new
             section.position = position
@@ -125,6 +125,7 @@ class Book < ActiveRecord::Base
             char_count = line.length
           end
         end
+        puts "CREATED #{position} SECTIONS"
       rescue => e
         raise e.message
       end
