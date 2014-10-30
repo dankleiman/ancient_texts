@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_admin!, only: [:edit, :update]
+
   def index
     @books = Book.all
   end

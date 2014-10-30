@@ -13,9 +13,8 @@ class Book < ActiveRecord::Base
     # grab title, author, and content for book
     # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
     # start = "*** START OF TH"
-    # start = "Produced by Jonathan Ingram"
-    start = "[Illustration: The Jade Flute--Chinese Poems in Prose]"
-    ending = "End of the Project Gutenberg"
+    start = "ccx074@coventry.ac.uk"
+    ending = "***END"
     text = ""
     book_number = text_file.match(/pg(.*).txt/)[1]
     capture = false
