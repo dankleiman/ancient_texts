@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title><%= yield(:title) %>Ancient Wisdom Texts</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= link_to('Home', root_url) %>
-  <% if user_signed_in? %>
-  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-<% else%>
-  <%= link_to "Sign In", new_user_session_path %>
-<% end %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <%= yield %>
+    <title><%= content_for?(:title) ? yield(:title) : "Ancient Wisdom Texts" %></title>
 
-</body>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <%= render 'layouts/navigation' %>
+    <%= render 'layouts/messages' %>
+    <div class="row">
+      <div class="large-2 columns"><%= render 'layouts/left_sidebar' %></div>
+      <div class="large-8 columns"><%= yield %></div>
+      <div class="large-2 columns">...</div>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>
