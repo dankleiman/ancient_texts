@@ -1,0 +1,10 @@
+<% content_for :title, "#{@blog_post.title} -- " %>
+<h1><%= @blog_post.title %></h1>
+<div>
+  <% if user_signed_in? and current_user.role == 'admin' %>
+  <%= link_to('Edit', edit_blog_post_path(@blog_post)) %>
+  <% end %>
+</div>
+<div><%= simple_format(@blog_post.body) %></div>
+<div><%= link_to('Read More from the Original Text', book_path(@blog_post.section.book, page: @blog_post.section.position)) %></div>
+

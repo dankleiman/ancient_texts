@@ -13,6 +13,10 @@ class BlogPostsController < ApplicationController
     @blog_post = BlogPost.new
   end
 
+  def approval_queue
+    @blog_posts = BlogPost.where(approved: false).order(:published_at)
+  end
+
   def update
     blog_post = BlogPost.find(params[:id])
     blog_post.update_attributes(blog_post_params)
@@ -26,7 +30,7 @@ class BlogPostsController < ApplicationController
   end
 
   def edit
-    @blog_post = blog_post.find(params[:id])
+    @blog_post = BlogPost.find(params[:id])
   end
 
   def destroy

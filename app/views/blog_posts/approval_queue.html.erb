@@ -1,0 +1,13 @@
+<h2>To Be Approved</h2>
+  <% if @blog_posts.any? %>
+    <% @blog_posts.each do |post| %>
+    <ul>
+      <li>
+        <%= link_to(post.title, edit_blog_post_path(post))%>
+      </li>
+    </ul>
+    <% end %>
+  <% else %>
+    <p>Nothing to approve at this time...</p>
+  <% end %>
+
