@@ -16,11 +16,10 @@
     <%= render 'layouts/navigation' %>
     <%= render 'layouts/messages' %>
     <div class="row">
-      <div class="large-2 columns"><%= render 'layouts/left_sidebar' %></div>
-      <div class="large-8 columns"><%= yield %></div>
-      <div class="large-2 columns">...</div>
+      <aside class="large-4 columns"><%= render 'layouts/left_sidebar' %></aside>
+      <div class="large-8 columns main"><%= yield %></div>
     </div>
-
+    <%= render 'layouts/footer' %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

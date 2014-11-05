@@ -2,7 +2,7 @@ class BlogPostsController < ApplicationController
   before_action :authenticate_admin!, only: [:edit, :new, :destroy, :update, :approval_queue]
 
   def index
-    @blog_posts = BlogPost.approved.order(:published_at)
+    @blog_posts = BlogPost.approved.order(:published_at).paginate(:page => params[:page])
   end
 
   def show

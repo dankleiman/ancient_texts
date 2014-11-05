@@ -3,6 +3,7 @@ class BlogPost < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :finders]
   belongs_to :post_author
   belongs_to :section
+  self.per_page = 5
 
   def self.approved
     BlogPost.where(approved: true)
@@ -11,7 +12,7 @@ class BlogPost < ActiveRecord::Base
   def self.generate_blog_post!
     post_section = Section.all.sample
     post_title = "#{post_section.book.author.full_name}, #{post_section.book.title}, #{post_section.content.first(50)}"
-    if BlogPost.find_by(title: post_title)
+    if BlogPost.find_by(section: post_section)
       BlogPost.generate_blog_post!
     else
       blog_post = BlogPost.create!(title: post_title, post_author_id: 1, approved: false, section: post_section)
@@ -37,8 +38,12 @@ class BlogPost < ActiveRecord::Base
   end
 
   def preview
-    self.body.first((body.length / 2))
+    line_count = 1
+    preview = ''
+    self.body.each_line do |line|
+      preview += line unless line_count > 10
+      line_count += 1
+    end
+    preview
   end
-
-
 end

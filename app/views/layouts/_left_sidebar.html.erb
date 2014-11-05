@@ -1,7 +1,16 @@
-<ul class="side-nav">
-  <li><strong>Have You Read?</strong></li>
-  <li><a href="#">Link 1</a></li>
-  <li><a href="#">Link 2</a></li>
-  <li><a href="#">Link 3</a></li>
-  <li><a href="#">Link 4</a></li>
-</ul>
+<div class="row">
+  <%= image_tag('logo.png', class: 'logo') %>
+</div>
+<div class="panel">
+  <h3>Featured</h3>
+    <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
+    <a href="#">Read More →</a>
+</div>
+<div>
+  <h3>Have You Read?</h3>
+  <ul class="side-nav">
+   <% @random_books.each do |book| %>
+    <li><%= link_to("#{book.title} by #{book.author.full_name}", book_path(book) )%></li>
+  <% end %>
+  </ul>
+</div>

@@ -1,12 +1,14 @@
 <% content_for :title, "#{@book.title} by  #{@book.author.full_name} -- " %>
-<h1><%= @book.title %></h1>
+<h2><%= @book.title %></h2>
 <strong>By <%= @book.author.full_name %></strong>
 <div>
   <% if user_signed_in? and current_user.role == 'admin' %>
   <%= link_to('Edit', edit_book_path(@book)) %>
   <% end %>
 </div>
-<p>Jump to a Section</p>
-<%= foundation_paginate @sections %>
+<div class="small">
+  <p>Jump to a Section</p>
+  <%= foundation_paginate @sections %>
+</div>
 <%= simple_format(@sections.first.content) %>
 <%= foundation_paginate @sections %>
