@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     end
   end
   resources :blog_posts
+  resources :users do
+    collection do
+      post :subscribe
+    end
+  end
 
   root to: "blog_posts#index"
 end

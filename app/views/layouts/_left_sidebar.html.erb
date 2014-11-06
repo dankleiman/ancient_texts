@@ -2,6 +2,17 @@
   <%= image_tag('logo.png', class: 'logo') %>
 </div>
 <div class="panel">
+  <h3>Insight in Your Inbox</h3>
+  <p>Ponder ancient wisdom via email!</p>
+  <p>Subscribe here to have fresh insights sent to you as they're published on the blog.</p>
+   <%= simple_form_for(User.new, url: subscribe_users_path) do |f| %>
+   <%= f.input :email %>
+
+   <%= f.submit 'Subscribe', class: "button radius" %>
+   <% end %>
+</div>
+
+<div class="panel">
   <h3>Featured</h3>
     <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
     <a href="#">Read More →</a>

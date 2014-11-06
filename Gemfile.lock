@@ -43,6 +43,11 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
+    dotenv-rails (0.11.1)
+      dotenv (= 0.11.1)
     erubis (2.7.0)
     execjs (2.2.2)
     foundation-rails (5.3.0.1)
@@ -51,7 +56,13 @@ GEM
     foundation-will_paginate (0.0.1)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
+    gibbon (1.1.3)
+      httparty
+      multi_json (>= 1.3.4)
     hike (1.2.3)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.11)
     jbuilder (2.2.3)
       activesupport (>= 3.0.0, < 5)
@@ -66,6 +77,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.2)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.5)
@@ -135,9 +147,11 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
+  dotenv-rails
   foundation-rails
   foundation-will_paginate
   friendly_id (~> 5.0.0)
+  gibbon
   jbuilder (~> 2.0)
   jquery-rails
   pg
