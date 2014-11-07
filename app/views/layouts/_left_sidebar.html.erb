@@ -5,11 +5,13 @@
   <h3>Insight in Your Inbox</h3>
   <p>Ponder ancient wisdom via email!</p>
   <p>Subscribe here to have fresh insights sent to you as they're published on the blog.</p>
-   <%= simple_form_for(User.new, url: subscribe_users_path) do |f| %>
-   <%= f.input :email %>
+   <div id='subscribe-form'>
+     <%= simple_form_for(User.new, url: subscribe_users_path, remote: true) do |f| %>
+     <%= f.input :email %>
 
-   <%= f.submit 'Subscribe', class: "button radius" %>
-   <% end %>
+     <%= f.submit 'Subscribe', class: "button radius", id: 'form-submit' %>
+     <% end %>
+   </div>
 </div>
 
 <div class="panel">
