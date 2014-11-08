@@ -1,9 +1,9 @@
 <% content_for :title, "#{@book.title} by  #{@book.author.full_name} -- " %>
 <h2><%= @book.title %></h2>
-<strong>By <%= @book.author.full_name %></strong>
+<p><strong>By <%= @book.author.full_name %></strong></p>
 <div>
   <% if user_signed_in? and current_user.role == 'admin' %>
-  <%= link_to('Edit', edit_book_path(@book)) %>
+  <p><%= link_to('Edit', edit_book_path(@book)) %></p>
   <% end %>
 </div>
 <div class="small">

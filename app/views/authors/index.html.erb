@@ -1,0 +1,11 @@
+<h1>Featured Authors</h1>
+<% @authors.each do |author| %>
+  <ul>
+    <li><%= author.full_name%></li>
+    <% author.books.each do |book|%>
+      <ul>
+        <li><%= link_to(book.title, book_path(book) )%></li>
+      </ul>
+    <% end %>
+  </ul>
+<% end %>

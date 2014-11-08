@@ -2,7 +2,7 @@
 <h2><%= @blog_post.title %></h2>
 <div>
   <% if user_signed_in? and current_user.role == 'admin' %>
-  <%= link_to('Edit', edit_blog_post_path(@blog_post)) %>
+  <p><%= link_to('Edit', edit_blog_post_path(@blog_post)) %></p>
   <% end %>
 </div>
 <div><%= simple_format(@blog_post.body) %></div>

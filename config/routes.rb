@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :authors, only: :index
   resources :books, only: [:index, :show, :edit, :update]
   resources :blog_posts do
     collection do
