@@ -7,7 +7,6 @@
     <title><%= content_for?(:title) ? yield(:title) : "Ancient Wisdom Texts" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -20,6 +19,7 @@
       <div class="large-8 columns main"><%= yield %></div>
     </div>
     <%= render 'layouts/footer' %>
+    <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
