@@ -98,6 +98,9 @@ class Book < ActiveRecord::Base
   def regenerate_sections!
     Book.transaction do
       begin
+        # create a map of current positions and sections
+        old_sections = {}
+        self.sections.each { |section| old_sections[section.position] = section.id }
         self.sections.destroy_all
         puts "DESTROYING OLD SECTIONS"
         section = self.sections.new
@@ -125,6 +128,11 @@ class Book < ActiveRecord::Base
           end
         end
         puts "CREATED #{position} SECTIONS"
+        old_sections.each do |position, section_id|
+          blog_post = BlogPost.find_by(section_id: section_id)
+          blog_post.update_attributes(section_id: self.sections.where(position: position).first.id) unless blog_post.nil?
+        end
+        puts "UPDATED RELATED BLOG POSTS"
       rescue => e
         raise e.message
       end
