@@ -17,6 +17,14 @@
         <%= link_to('Authors', authors_path) %>
       </li>
     </ul>
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li>
+        <% if current_user and current_user.role == 'admin' %>
+          <li><%= link_to('Admin', approval_queue_blog_posts_path) %></li>
+        <% end %>
+      </li>
+    </ul>
   </section>
 </nav>
 

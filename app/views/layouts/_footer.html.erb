@@ -5,6 +5,13 @@
         <div class="large-6 columns">
           <p>© Copyright 2014 Ancient Wisdom Texts</p>
         </div>
+        <div class="large-6 columns">
+        <ul class="inline-list right">
+          <% if !current_user %>
+            <li><%= link_to('Sign In', new_user_session_path) %></li>
+          <% end %>
+        </ul>
+      </div>
       </div>
     </div>
   </footer>
