@@ -9,8 +9,8 @@ class BlogPost < ActiveRecord::Base
     BlogPost.where(approved: true)
   end
 
-  def published
-
+  def self.published
+    BlogPost.approved.where('published_at <= ?', Date.today)
   end
 
   def approved?

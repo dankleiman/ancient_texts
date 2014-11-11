@@ -2,7 +2,7 @@ class BlogPostsController < ApplicationController
   before_action :authenticate_admin!, only: [:edit, :new, :destroy, :update, :approval_queue]
 
   def index
-    @blog_posts = BlogPost.approved.order(:published_at).paginate(:page => params[:page])
+    @blog_posts = BlogPost.published.paginate(:page => params[:page])
   end
 
   def show
@@ -14,7 +14,9 @@ class BlogPostsController < ApplicationController
   end
 
   def approval_queue
-    @blog_posts = BlogPost.where(approved: false).order(:published_at)
+    @pending_approval = BlogPost.where(approved: false).order(:published_at)
+    @pending_publication = BlogPost.approved.where('published_at > ?', Date.today)
+    @missing_dates = BlogPost.where(published_at: nil)
     render :layout => 'admin'
   end
 
