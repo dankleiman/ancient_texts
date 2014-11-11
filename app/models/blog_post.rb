@@ -9,6 +9,14 @@ class BlogPost < ActiveRecord::Base
     BlogPost.where(approved: true)
   end
 
+  def published
+
+  end
+
+  def approved?
+    self.approved ? 'Yes' : 'No'
+  end
+
   def self.generate_blog_post!
     post_section = Section.all.sample
     post_title = "#{post_section.book.author.full_name}, #{post_section.book.title}, #{post_section.content.first(50)}"

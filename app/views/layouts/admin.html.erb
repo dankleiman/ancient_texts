@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Ancient Wisdom Texts" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= csrf_meta_tags %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+  </head>
+
+  <body>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/navigation' %>
+    <%= render 'layouts/messages' %>
+    <div class="row">
+      <aside class="large-2 columns"><%= render 'layouts/admin_sidebar' %></aside>
+      <div class="large-9 columns main"><%= yield %></div>
+    </div>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

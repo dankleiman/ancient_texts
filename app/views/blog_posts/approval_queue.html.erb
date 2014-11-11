@@ -1,13 +1,28 @@
 <h2>To Be Approved</h2>
-  <% if @blog_posts.any? %>
+<% if @blog_posts.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th width="200">Post Title</th>
+        <th width="50">Approved?</th>
+        <th width="150">Publish Date</th>
+        <th width="150">Edit</th>
+        <th width="150">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
     <% @blog_posts.each do |post| %>
-    <ul>
-      <li>
-        <%= link_to(post.title, edit_blog_post_path(post))%>
-      </li>
-    </ul>
-    <% end %>
-  <% else %>
-    <p>Nothing to approve at this time...</p>
-  <% end %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.approved? %></td>
+        <td><%= post.published_at %></td>
+        <td><%= link_to('Edit', edit_blog_post_path(post))%></td>
+        <td><%= link_to('Delete', blog_post_path(post), data: {confirm: 'Are you sure?'}, method: :delete)%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nothing to approve at this time...</p>
+<% end %>
 

@@ -1,0 +1,10 @@
+<div class="row">
+  <%= image_tag('logo.png', class: 'logo') %>
+</div>
+<div>
+  <h3>Admin</h3>
+  <ul class="side-nav">
+   <li><%= link_to('Approval Queue', approval_queue_blog_posts_path) %></li>
+   <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+  </ul>
+</div>

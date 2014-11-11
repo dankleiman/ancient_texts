@@ -15,6 +15,7 @@ class BlogPostsController < ApplicationController
 
   def approval_queue
     @blog_posts = BlogPost.where(approved: false).order(:published_at)
+    render :layout => 'admin'
   end
 
   def update
@@ -40,7 +41,7 @@ class BlogPostsController < ApplicationController
     else
       flash[:alert] = "Could not delete."
     end
-    redirect_to blog_posts_path
+    redirect_to :back
   end
 
   private
