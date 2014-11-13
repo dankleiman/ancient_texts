@@ -30,6 +30,7 @@ gem 'devise'
 gem 'foundation-rails'
 gem 'foundation-will_paginate'
 gem 'gibbon'
+gem 'dynamic_sitemaps'
 
 
 
