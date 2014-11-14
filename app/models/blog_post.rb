@@ -10,7 +10,7 @@ class BlogPost < ActiveRecord::Base
   end
 
   def self.published
-    BlogPost.approved.where('published_at <= ?', Date.today)
+    BlogPost.approved.where('published_at <= ?', Date.today).order('published_at DESC')
   end
 
   def approved?
