@@ -19,13 +19,12 @@ class BlogPost < ActiveRecord::Base
 
   def self.generate_blog_post!
     post_section = Section.all.sample
-    post_title = "#{post_section.book.author.full_name}, #{post_section.book.title}, #{post_section.content.first(50)}"
+    post_title = "#{post_section.book.author.full_name}, #{post_section.book.title}, SECTION: #{post_section.position} "
     if BlogPost.find_by(section: post_section)
       BlogPost.generate_blog_post!
     else
       blog_post = BlogPost.create!(title: post_title, post_author_id: 1, approved: false, section: post_section, published_at: (BlogPost.last.published_at + 1) )
       puts "CREATING BLOG POST FROM #{post_title}"
-      puts "STARTING AT SECTION #{post_section.position}"
       line_count = 0
       post_section.content.each_line do |line|
         line_count += 1
