@@ -2,7 +2,7 @@
  <%= simple_form_for @blog_post do |f| %>
    <%= f.input :title %>
    <%= f.input :body %>
-   <%= f.input :published_at %>
+   <%= f.input :published_at, as: :date %>
    <%= f.input :approved, as: :boolean %>
    <%= f.button :submit %>
  <% end %>
