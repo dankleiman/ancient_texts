@@ -41,6 +41,7 @@ class BlogPost < ActiveRecord::Base
         line_to_record += 1
       end
       blog_post.update_attributes(body: post_body)
+      BlogPostMailer.new_post(User.first, blog_post).deliver
     end
   end
 
