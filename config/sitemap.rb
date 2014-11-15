@@ -8,7 +8,7 @@ sitemap :site do
   url authors_url, last_mod: Time.now, change_freq: "weekly", priority: 0.5
   Book.all.each do |book|
     book.sections.each do |section|
-      url book_url(id: book.slug, page: section.position), last_mod: Time.now , priority: 1.0
+      url book_url(id: book.slug, page: section.position), last_mod: book.updated_at , priority: 1.0
     end
   end
   BlogPost.published.each do |post|
