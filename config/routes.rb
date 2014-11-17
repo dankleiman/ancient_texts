@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get "sitemap.xml" => "home#sitemap", format: :xml, as: :sitemap
   get "robots.txt" => "home#robots", format: :text, as: :robots
+  get "/privacy" => "home#privacy", format: :html, as: :privacy
 
   root to: "blog_posts#index"
 end

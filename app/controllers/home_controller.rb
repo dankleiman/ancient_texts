@@ -10,4 +10,7 @@ class HomeController < ApplicationController
 
   def robots
   end
+
+  def privacy
+  end
 end
