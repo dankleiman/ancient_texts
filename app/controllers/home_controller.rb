@@ -13,7 +13,4 @@ class HomeController < ApplicationController
 
   def privacy
   end
-
-  def google
-  end
 end
