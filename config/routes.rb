@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :authors, only: :index
+  resources :books do
+    member do
+      get :cover_chooser
+    end
+  end
   resources :books, only: [:index, :show, :edit, :update]
   resources :blog_posts do
     collection do
@@ -17,6 +22,7 @@ Rails.application.routes.draw do
   get "sitemap.xml" => "home#sitemap", format: :xml, as: :sitemap
   get "robots.txt" => "home#robots", format: :text, as: :robots
   get "/privacy" => "home#privacy", format: :html, as: :privacy
+  get "/google29a8a20a4a52a176.html" => "home#google", format: :html, as: :google
 
   root to: "blog_posts#index"
 end
