@@ -1,0 +1,8 @@
+<h2><%= @book.title %></h2>
+<p><strong>By <%= @book.author.full_name %></strong></p>
+<ul class="small-block-grid-6">
+<% @products.each do |product| %>
+  <li><%= image_tag(product) %></li>
+<% end %>
+</ul>
+

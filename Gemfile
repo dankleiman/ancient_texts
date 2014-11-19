@@ -32,6 +32,7 @@ gem 'foundation-will_paginate'
 gem 'gibbon'
 gem 'dynamic_sitemaps'
 gem 'vacuum'
+gem "paperclip", "~> 4.2"
 
 
 

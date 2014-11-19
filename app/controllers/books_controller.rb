@@ -27,6 +27,32 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def cover_chooser
+    @book = Book.find(params[:id])
+    request = Vacuum.new
+
+    request.configure(
+      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+      associate_tag: ENV['ASSOCIATE_TAG']
+      )
+    params = {
+      'SearchIndex' => 'Books',
+      'Keywords'=> @book.title,
+      'ResponseGroup' => "ItemAttributes,Images"
+    }
+
+    raw_products = request.item_search(query: params)
+    hashed_products = raw_products.to_h
+    @products = hashed_products['ItemSearchResponse']['Items']['Item'].map { |item| item['LargeImage']['URL'] }
+      # product = OpenStruct.new
+      # product = item['ItemAttributes']['Title']
+      # product.name = item['ItemAttributes']['Title']
+      # product.url = item['DetailPageURL']
+
+    render :layout => 'admin'
+  end
+
   private
 
   def book_params

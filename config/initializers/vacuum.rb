@@ -1,6 +1,6 @@
-req = Vacuum.new
+@vacuum = Vacuum.new
 
-req.configure(
+@vacuum.configure(
   aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
   aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
   associate_tag: ENV['ASSOCIATE_TAG']
