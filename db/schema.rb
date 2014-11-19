@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118172631) do
+ActiveRecord::Schema.define(version: 20141119131802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20141118172631) do
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
     t.string   "asin"
+    t.boolean  "approved",           default: false
   end
 
   add_index "books", ["slug"], name: "index_books_on_slug", using: :btree

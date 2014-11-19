@@ -1,8 +1,14 @@
 class BooksController < ApplicationController
-  before_action :authenticate_admin!, only: [:edit, :update]
+  before_action :authenticate_admin!, only: [:edit, :update, :admin_index]
 
   def index
-    @books = Book.all
+    @books = Book.approved
+  end
+
+  def admin_index
+    @published = Book.approved
+    @pending = Book.pending
+    render :layout => 'admin'
   end
 
   def show

@@ -1,0 +1,56 @@
+<h3>To Be Approved</h3>
+<% if @pending.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th width="200">BookTitle</th>
+        <th width="50">Approved?</th>
+        <th width="150">Choose Cover</th>
+        <th width="150">Edit</th>
+        <th width="150">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @pending.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.approved? %></td>
+        <td>Add cover image and link to cover chooser</td>
+        <td><%= link_to('Edit', edit_book_path(book))%></td>
+        <td><%= link_to('Delete', book_path(book), data: {confirm: 'Are you sure?'}, method: :delete)%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nothing to approve at this time...</p>
+<% end %>
+<h3>Published</h3>
+<% if @published.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th width="200">BookTitle</th>
+        <th width="50">Approved?</th>
+        <th width="150">Choose Cover</th>
+        <th width="150">Edit</th>
+        <th width="150">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @published.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.approved? %></td>
+        <td>Add cover image and link to cover chooser</td>
+        <td><%= link_to('Edit', edit_book_path(book))%></td>
+        <td><%= link_to('Delete', book_path(book), data: {confirm: 'Are you sure?'}, method: :delete)%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nothing pending at this time...</p>
+<% end %>
+
+

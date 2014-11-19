@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     member do
       get :cover_chooser
     end
+    collection do
+      get :admin_index
+    end
   end
   resources :books, only: [:index, :show, :edit, :update]
   resources :blog_posts do

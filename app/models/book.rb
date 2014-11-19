@@ -3,6 +3,8 @@ class Book < ActiveRecord::Base
   friendly_id :author_and_title, use: [:slugged, :finders]
   belongs_to :author
   has_many :sections, dependent: :destroy
+  scope :approved, -> { where approved: true }
+  scope :pending, -> { where approved: false }
 
   def author_and_title
     "#{author.full_name} #{title}"
@@ -12,34 +14,16 @@ class Book < ActiveRecord::Base
     # expects text file with book number in title
     # grab title, author, and content for book
     # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
-    # start = "*** START OF TH"
-    start = "ccx074@coventry.ac.uk"
-    ending = "***END"
     text = ""
     book_number = text_file.match(/pg(.*).txt/)[1]
-    capture = false
     puts "Opening source file: #{text_file}"
     @title = ''
     @author = ''
-    capturing = 0
     File.open(text_file).each do |line|
       @title = line.split("Title: ").last if line.start_with?("Title:")
       @author = line.split("Author: ").last if line.start_with?("Author:")
-      if line.start_with?(start)
-        @first_line = line
-        capture = true
-        capturing += 1
-      end
-      if capture && capturing == 1
-        text += line
-      end
-      if line.start_with?(ending)
-        capture = false
-        @last_line = line
-      end
+      text += line
     end
-    text.slice!(@first_line)
-    text.slice!(@last_line)
     text.strip!
 
     # save book and author info
