@@ -13,6 +13,8 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+
+    render :layout => 'admin'
   end
 
   def create
