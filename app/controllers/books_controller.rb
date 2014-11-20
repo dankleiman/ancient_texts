@@ -59,14 +59,16 @@ class BooksController < ApplicationController
       'Keywords'=> @book.title,
       'ResponseGroup' => "ItemAttributes,Images"
     }
+    @products = []
+    products = request.item_search(query: params).to_h
+    products['ItemSearchResponse']['Items']['Item'].each do |item|
+      product = OpenStruct.new
+      product.name = item['ItemAttributes']['Title']
+      product.url = item['DetailPageURL']
+      product.image_url = item['LargeImage']['URL']
 
-    raw_products = request.item_search(query: params)
-    hashed_products = raw_products.to_h
-    @products = hashed_products['ItemSearchResponse']['Items']['Item'].map { |item| item['LargeImage']['URL'] }
-      # product = OpenStruct.new
-      # product = item['ItemAttributes']['Title']
-      # product.name = item['ItemAttributes']['Title']
-      # product.url = item['DetailPageURL']
+      @products << product
+    end
 
     render :layout => 'admin'
   end

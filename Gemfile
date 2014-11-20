@@ -33,6 +33,7 @@ gem 'gibbon'
 gem 'dynamic_sitemaps'
 gem 'vacuum'
 gem "paperclip", "~> 4.2"
+gem 'fontawesome-rails-cdn'
 
 
 

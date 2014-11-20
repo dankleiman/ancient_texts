@@ -56,6 +56,7 @@ GEM
     erubis (2.7.0)
     excon (0.39.2)
     execjs (2.2.2)
+    fontawesome-rails-cdn (4.0.3)
     foundation-rails (5.3.0.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -170,6 +171,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   dynamic_sitemaps
+  fontawesome-rails-cdn
   foundation-rails
   foundation-will_paginate
   friendly_id (~> 5.0.0)
