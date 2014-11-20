@@ -15,11 +15,11 @@ class Book < ActiveRecord::Base
     # grab title, author, and content for book
     # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
     text = ""
-    book_number = text_file.match(/pg(.*).txt/)[1]
-    puts "Opening source file: #{text_file}"
+    book_number = text_file.original_filename.match(/pg(.*).txt/)[1]
+    puts "Opening source file: #{text_file.original_filename}"
     @title = ''
     @author = ''
-    File.open(text_file).each do |line|
+    File.open(text_file.tempfile).each do |line|
       @title = line.split("Title: ").last if line.start_with?("Title:")
       @author = line.split("Author: ").last if line.start_with?("Author:")
       text += line

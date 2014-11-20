@@ -1,0 +1,6 @@
+ <h2>New Book</h2>
+ Upload a text file to create a new book.
+ <%= simple_form_for @book do |f| %>
+   <%= f.input :file, as: :file %>
+   <%= f.button :submit %>
+ <% end %>

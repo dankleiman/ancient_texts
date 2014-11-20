@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :admin_index
     end
   end
-  resources :books, only: [:index, :show, :edit, :update]
+  resources :books
   resources :blog_posts do
     collection do
       get :approval_queue

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_admin!, only: [:edit, :update, :admin_index]
+  before_action :authenticate_admin!, except: [:index, :show]
 
   def index
     @books = Book.approved
@@ -9,6 +9,16 @@ class BooksController < ApplicationController
     @published = Book.approved
     @pending = Book.pending
     render :layout => 'admin'
+  end
+
+  def new
+    @book = Book.new
+  end
+
+  def create
+    Book.create_from_txt!(params[:book][:file])
+    flash[:notice] = "Successfully created new book."
+    redirect_to admin_index_books_path
   end
 
   def show
