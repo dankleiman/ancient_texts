@@ -10,7 +10,7 @@ class Book < ActiveRecord::Base
   scope :with_cover, -> {joins(:item).where('items.id IS NOT NULL').uniq}
 
   def author_and_title
-    "#{author.full_name} #{title}"
+    "#{author.full_name}, #{title}"
   end
 
   def self.create_from_txt!(text_file)

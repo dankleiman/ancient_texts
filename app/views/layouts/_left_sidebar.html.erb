@@ -1,18 +1,11 @@
 <div class="row">
   <%= image_tag('logo.png', class: 'logo') %>
 </div>
-<div class="panel">
-  <h3>Insight in Your Inbox</h3>
-  <p>Ponder ancient wisdom via email!</p>
-  <p>Subscribe here to have fresh insights sent to you as they're published on the blog.</p>
-   <div id='subscribe-form'>
-     <%= simple_form_for(User.new, url: subscribe_users_path, remote: true) do |f| %>
-     <%= f.input :email %>
-
-     <%= f.submit 'Subscribe', class: "button radius", id: 'form-submit' %>
-     <% end %>
-   </div>
-</div>
+<% if @book.present? and current_page?(book_path(@book)) %>
+  <%= render 'layouts/offer' %>
+<% else %>
+  <%= render 'layouts/subscribe' %>
+<% end %>
 <div>
   <h3>Have You Read?</h3>
   <ul class="side-nav">
