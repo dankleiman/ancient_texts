@@ -12,3 +12,9 @@
   height: auto;
   margin-bottom: 10px;
 }
+
+.thumb {
+  max-width: 90px;
+  height: auto;
+  margin: 10px;
+}

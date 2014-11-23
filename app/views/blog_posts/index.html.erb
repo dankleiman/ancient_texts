@@ -1,5 +1,5 @@
-<div class='panel'>
-  <h3>
+<div class='panel radius'>
+  <h3 class="text-center">
     Welcome to Ancient Wisdom Texts
   </h3>
   <p style='font-style:italic'>
@@ -9,6 +9,9 @@
 <% @blog_posts.each do |post| %>
     <article>
       <h3><%= post.title%></h3>
+      <% if post.book.item.present? %>
+      <%= link_to image_tag(post.book.item.image_url, class: "thumb left",alt: "New post drawn from #{post.book.author_and_title}", title: "New post drawn from #{post.book.author_and_title}"), blog_post_path(post) %>
+      <% end %>
         <div>
           <%= simple_format(post.preview)%>
         </div>
