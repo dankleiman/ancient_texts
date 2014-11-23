@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_random_books
 
   def get_random_books
-    @random_books = Book.all.sample(5)
+    @random_books = Book.with_cover.sample(6)
   end
 
   def authenticate_admin!

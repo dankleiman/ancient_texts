@@ -6,11 +6,11 @@
 <% else %>
   <%= render 'layouts/subscribe' %>
 <% end %>
-<div>
-  <h3>Have You Read?</h3>
-  <ul class="side-nav">
+  <div class="panel radius">
+  <h3 class="text-center">Have You Read?</h3>
+  <ul class="small-block-grid-2">
    <% @random_books.each do |book| %>
-    <li><%= link_to("#{book.title} by #{book.author.full_name}", book_path(book) )%></li>
+    <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
   <% end %>
   </ul>
 </div>
