@@ -6,7 +6,7 @@
 <% else %>
   <%= render 'layouts/subscribe' %>
 <% end %>
-<% unless current_page?(books_path) %>
+<% unless current_page?(books_path) or current_page?(authors_path) %>
   <%= render 'layouts/random' %>
 <% end %>
 <div>
