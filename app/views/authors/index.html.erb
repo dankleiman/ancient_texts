@@ -1,15 +1,18 @@
 <h1>Featured Authors</h1>
-<% @authors.each do |author| %>
-  <article>
-    <%= author.full_name%></li>
-    <% author.books.each do |book|%>
-      <ul class="small-block-grid-5">
-        <% if book.item.present? %>
-          <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
-        <% else %>
-         <li><%= link_to book.title, book_path(book) %></li>
-        <% end %>
-      </ul>
+  <ul class="small-block-grid-3">
+    <% @authors.each do |author| %>
+    <li>
+      <%= author.full_name%>
+      <% author.books.each do |book|%>
+        <ul class="small-block-grid-5">
+          <% if book.item.present? %>
+            <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
+          <% else %>
+           <li><%= link_to book.title, book_path(book) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
     <% end %>
-  </article>
-<% end %>
+  </ul>
+
