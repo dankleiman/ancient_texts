@@ -45,6 +45,16 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def destroy
+    book = Book.find(params[:id])
+    if book.destroy
+      flash[:notice] = "Successfully deleted."
+    else
+      flash[:alert] = "Could not delete."
+    end
+    redirect_to admin_index_books_path
+  end
+
   def cover_chooser
     @book = Book.find(params[:id])
     request = Vacuum.new
