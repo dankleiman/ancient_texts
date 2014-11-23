@@ -1,17 +1,29 @@
 <h1>Featured Authors</h1>
-  <ul class="small-block-grid-3">
+  <ul class="small-block-grid-2">
     <% @authors.each do |author| %>
     <li>
-      <%= author.full_name%>
-      <% author.books.each do |book|%>
-        <ul class="small-block-grid-5">
-          <% if book.item.present? %>
-            <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
-          <% else %>
-           <li><%= link_to book.title, book_path(book) %></li>
-          <% end %>
-        </ul>
-      <% end %>
+      <table>
+        <thead>
+          <tr>
+            <th><%= author.full_name%></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul class="small-block-grid-3">
+                <% author.books.each do |book|%>
+                  <% if book.item.present? %>
+                    <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
+                  <% else %>
+                   <li><%= link_to book.title, book_path(book) %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </li>
     <% end %>
   </ul>
