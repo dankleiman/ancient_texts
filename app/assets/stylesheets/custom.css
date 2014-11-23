@@ -16,5 +16,6 @@
 .thumb {
   max-width: 90px;
   height: auto;
-  margin: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }

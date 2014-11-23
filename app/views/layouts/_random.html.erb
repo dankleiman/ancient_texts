@@ -1,0 +1,9 @@
+<div class="panel radius">
+  <h3 class="text-center">Have You Read?</h3>
+  <ul class="small-block-grid-2">
+   <% @random_books.each do |book| %>
+    <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
+  <% end %>
+  </ul>
+  <%= link_to "More...", books_path, class: "right" %>
+</div>

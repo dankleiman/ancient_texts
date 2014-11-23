@@ -6,23 +6,17 @@
 <% else %>
   <%= render 'layouts/subscribe' %>
 <% end %>
-  <div class="panel radius">
-  <h3 class="text-center">Have You Read?</h3>
-  <ul class="small-block-grid-2">
-   <% @random_books.each do |book| %>
-    <li><%= link_to image_tag(book.item.image_url,  alt: book.author_and_title, title: book.author_and_title), book_path(book) %></li>
-  <% end %>
-  </ul>
-  <%= link_to "More...", books_path, class: "right" %>
-</div>
+<% unless current_page?(books_path) %>
+  <%= render 'layouts/random' %>
+<% end %>
 <div>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Left Sidebar -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:600px"
-     data-ad-client="ca-pub-3638369055976883"
-     data-ad-slot="1011078402"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Left Sidebar -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:300px;height:600px"
+       data-ad-client="ca-pub-3638369055976883"
+       data-ad-slot="1011078402"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </div>
