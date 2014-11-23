@@ -7,6 +7,7 @@ class Book < ActiveRecord::Base
   has_one :item
   scope :approved, -> { where approved: true }
   scope :pending, -> { where approved: false }
+  scope :with_cover, -> {joins(:item).where('items.id IS NOT NULL').uniq}
 
   def author_and_title
     "#{author.full_name} #{title}"

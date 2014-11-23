@@ -1,6 +1,6 @@
-<h1><%= @books.count %> Books Filled with Ancient Wisdom</h1>
+<h1>Read Original Texts for Free</h1>
+<ul class="small-block-grid-5">
 <% @books.each do |book| %>
-  <ul>
-    <li><%= link_to("#{book.title} by #{book.author.full_name}", book_path(book) )%></li>
-  </ul>
+  <li><%= link_to image_tag(book.item.image_url), book_path(book) %></li>
 <% end %>
+</ul>

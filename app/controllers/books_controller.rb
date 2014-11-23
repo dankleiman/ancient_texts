@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show]
 
   def index
-    @books = Book.approved
+    @books = Book.approved.with_cover
   end
 
   def admin_index
