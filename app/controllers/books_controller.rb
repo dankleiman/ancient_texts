@@ -56,7 +56,7 @@ class BooksController < ApplicationController
       )
     params = {
       'SearchIndex' => 'Books',
-      'Keywords'=> @book.title,
+      'Keywords'=> "#{@book.title},#{@book.author.full_name}",
       'ResponseGroup' => "ItemAttributes,Images"
     }
     @products = []
