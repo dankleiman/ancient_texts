@@ -2,7 +2,6 @@
 <p><strong>By <%= @book.author.full_name %></strong></p>
 <ul class="small-block-grid-6">
 <% @products.each do |product| %>
-  <li><%= link_to image_tag(product.image_url), product.url %></li>
+  <li><%= link_to image_tag(product.image_url), items_path(item: {image_url: product.image_url, title: product.title, detail_page_url: product.url, book_id: @book.id}), method: :post %></li>
 <% end %>
 </ul>
-

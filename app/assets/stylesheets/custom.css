@@ -6,3 +6,9 @@
 .main {
   margin-top: 25px;
 }
+
+.small-cover {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 10px;
+}

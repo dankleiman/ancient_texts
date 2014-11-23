@@ -1,4 +1,4 @@
-<h3>To Be Approved</h3>
+<h3>Books To Be Approved</h3>
 <% if @pending.any? %>
   <table>
     <thead>
@@ -14,8 +14,15 @@
     <% @pending.each do |book| %>
       <tr>
         <td><%= book.title %></td>
-        <td><%= book.approved? ? "<i class='fa fa-check'></i> yes".html_safe : "<i class='fa fa-close'>no</i>".html_safe %></td>
-        <td><%= link_to('Choose a Cover', cover_chooser_book_path(book))%></td>
+        <td><%= book.approved? ? icon('check') : icon('close') %></td>
+        <% if book.item.present? %>
+          <td class="small-cover">
+            <%= image_tag(book.item.image_url) %>
+            <%= link_to('Edit Cover', cover_chooser_book_path(book))%>
+          </td>
+        <% else %>
+          <td><%= link_to('Choose a Cover', cover_chooser_book_path(book))%></td>
+        <% end %>
         <td><%= link_to('Edit', edit_book_path(book))%></td>
         <td><%= link_to('Delete', book_path(book), data: {confirm: 'Are you sure?'}, method: :delete)%></td>
       </tr>
@@ -41,8 +48,15 @@
     <% @published.each do |book| %>
       <tr>
         <td><%= book.title %></td>
-        <td><%= book.approved? ? "<i class='fa fa-check'></i> yes".html_safe : "<i class='fa fa-close'>no</i>".html_safe %></td>
-        <td><%= link_to('Choose a Cover', cover_chooser_book_path(book))%></td>
+        <td><%= book.approved? ? icon('check') : icon('close') %></td>
+        <% if book.item.present? %>
+          <td>
+            <div class="small-cover"><%= image_tag(book.item.image_url) %></div>
+            <div><%= link_to('Edit Cover', cover_chooser_book_path(book))%></div>
+          </td>
+        <% else %>
+          <td><%= link_to('Choose a Cover', cover_chooser_book_path(book))%></td>
+        <% end %>
         <td><%= link_to('Edit', edit_book_path(book))%></td>
         <td><%= link_to('Delete', book_path(book), data: {confirm: 'Are you sure?'}, method: :delete)%></td>
       </tr>

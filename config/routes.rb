@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :authors, only: :index
+  resources :items, only: :create
   resources :books do
     member do
       get :cover_chooser

@@ -63,7 +63,7 @@ class BooksController < ApplicationController
     products = request.item_search(query: params).to_h
     products['ItemSearchResponse']['Items']['Item'].each do |item|
       product = OpenStruct.new
-      product.name = item['ItemAttributes']['Title']
+      product.title = item['ItemAttributes']['Title']
       product.url = item['DetailPageURL']
       product.image_url = item['LargeImage']['URL']
 

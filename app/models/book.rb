@@ -3,6 +3,7 @@ class Book < ActiveRecord::Base
   friendly_id :author_and_title, use: [:slugged, :finders]
   belongs_to :author
   has_many :sections, dependent: :destroy
+  has_one :item
   scope :approved, -> { where approved: true }
   scope :pending, -> { where approved: false }
 
