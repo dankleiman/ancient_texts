@@ -3,6 +3,7 @@ class BlogPost < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :finders]
   belongs_to :post_author
   belongs_to :section
+  has_one :book, through: :section
   self.per_page = 5
 
   def self.approved
