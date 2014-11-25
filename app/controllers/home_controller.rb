@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   end
 
   def robots
+    render 'robots.txt.erb'
   end
 
   def privacy

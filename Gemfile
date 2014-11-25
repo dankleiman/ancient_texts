@@ -36,7 +36,6 @@ gem "paperclip", "~> 4.2"
 gem 'font-awesome-sass'
 
 
-
 group :development do
   gem 'spring'
   gem 'dotenv-rails'
