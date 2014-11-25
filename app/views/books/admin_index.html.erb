@@ -16,9 +16,9 @@
         <td><%= book.title %></td>
         <td><%= book.approved? ? icon('check') : icon('close') %></td>
         <% if book.item.present? %>
-          <td class="small-cover">
-            <%= image_tag(book.item.image_url) %>
-            <%= link_to('Edit Cover', cover_chooser_book_path(book))%>
+          <td>
+            <div class="small-cover"><%= image_tag(book.item.image_url) %></div>
+            <div><%= link_to('Edit Cover', cover_chooser_book_path(book))%></div>
           </td>
         <% else %>
           <td><%= link_to('Choose a Cover', cover_chooser_book_path(book))%></td>

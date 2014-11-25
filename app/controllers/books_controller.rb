@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show]
+  layout 'admin', except: [:index, :show]
 
   def index
     @books = Book.approved.with_cover
@@ -8,13 +9,10 @@ class BooksController < ApplicationController
   def admin_index
     @published = Book.approved
     @pending = Book.pending
-    render :layout => 'admin'
   end
 
   def new
     @book = Book.new
-
-    render :layout => 'admin'
   end
 
   def create
@@ -79,8 +77,6 @@ class BooksController < ApplicationController
 
       @products << product
     end
-
-    render :layout => 'admin'
   end
 
   private
