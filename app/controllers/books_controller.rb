@@ -45,7 +45,9 @@ class BooksController < ApplicationController
 
   def destroy
     book = Book.find(params[:id])
+    author = book.author
     if book.destroy
+      author.destroy unless author.books.any?
       flash[:notice] = "Successfully deleted."
     else
       flash[:alert] = "Could not delete."
