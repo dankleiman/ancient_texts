@@ -35,6 +35,9 @@ gem 'vacuum'
 gem "paperclip", "~> 4.2"
 gem 'font-awesome-sass'
 
+gem "carrierwave"
+gem "fog", "~> 1.3.1"
+
 
 group :development do
   gem 'spring'
