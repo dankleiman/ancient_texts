@@ -6,6 +6,14 @@ class BlogPostsController < ApplicationController
     @blog_posts = BlogPost.published.paginate(:page => params[:page])
   end
 
+  def feed
+    @blog_posts = BlogPost.published
+
+    respond_to do |format|
+     format.atom { render :layout => false }
+    end
+  end
+
   def show
     @blog_post = BlogPost.find(params[:id])
   end
