@@ -38,6 +38,8 @@ gem 'font-awesome-sass'
 gem "carrierwave"
 gem "fog", "~> 1.3.1"
 
+gem "prawn"
+
 
 group :development do
   gem 'spring'
