@@ -3,12 +3,11 @@
 </div>
 <% if @book.present? and current_page?(book_path(@book)) %>
   <%= render 'layouts/offer' %>
-<% else %>
-  <%= render 'layouts/subscribe' %>
 <% end %>
 <% unless current_page?(books_path) or current_page?(authors_path) %>
   <%= render 'layouts/random' %>
 <% end %>
+<%= render 'layouts/subscribe' %>
 <div>
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- Left Sidebar -->
