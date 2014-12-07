@@ -125,4 +125,19 @@ class Book < ActiveRecord::Base
       end
     end
   end
+
+  def create_pdf!
+    book_title = "#{self.title} by #{self.author.full_name}"
+    book_content = self.content
+    # path =
+    # create and upload to s3 folder. need carrierwave attachement?
+    Prawn::Document.generate("#{self.title}_by_#{self.author.full_name}.pdf") do
+      text book_title
+
+      start_new_page
+
+      text book_content
+
+    end
+  end
 end

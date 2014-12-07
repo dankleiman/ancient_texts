@@ -31,7 +31,7 @@ gem 'foundation-rails'
 gem 'foundation-will_paginate'
 gem 'gibbon'
 gem 'dynamic_sitemaps'
-gem 'vacuum'
+gem 'amazon-ecs'
 gem "paperclip", "~> 4.2"
 gem 'font-awesome-sass'
 

@@ -57,25 +57,15 @@ class BooksController < ApplicationController
 
   def cover_chooser
     @book = Book.find(params[:id])
-    request = Vacuum.new
-
-    request.configure(
-      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-      associate_tag: ENV['ASSOCIATE_TAG']
-      )
-    params = {
-      'SearchIndex' => 'Books',
-      'Keywords'=> "#{@book.title},#{@book.author.full_name}",
-      'ResponseGroup' => "ItemAttributes,Images"
-    }
+    search_term = "#{@book.title},#{@book.author.full_name}"
+    response_group = {:response_group => 'ItemAttributes,Images'}
     @products = []
-    products = request.item_search(query: params).to_h
-    products['ItemSearchResponse']['Items']['Item'].each do |item|
+    res = Amazon::Ecs.item_search(search_term, response_group)
+    res.items.each do |item|
       product = OpenStruct.new
-      product.title = item['ItemAttributes']['Title']
-      product.url = item['DetailPageURL']
-      product.image_url = item['LargeImage']['URL']
+      product.title = item.get('ItemAttributes/Title')
+      product.url = item.get('DetailPageURL')
+      product.image_url = item.get('LargeImage/URL')
 
       @products << product
     end
