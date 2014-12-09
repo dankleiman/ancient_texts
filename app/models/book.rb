@@ -8,6 +8,7 @@ class Book < ActiveRecord::Base
   scope :approved, -> { where approved: true }
   scope :pending, -> { where approved: false }
   scope :with_cover, -> {joins(:item).where('items.id IS NOT NULL').uniq}
+  scope :with_recent_posts, ->{joins(:blog_posts).where('blog_posts.published_at < ?', Date.today - 30).uniq}
 
   def author_and_title
     "#{author.full_name}, #{title}"

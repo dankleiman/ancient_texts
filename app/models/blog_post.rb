@@ -14,12 +14,17 @@ class BlogPost < ActiveRecord::Base
     BlogPost.approved.where('published_at <= ?', Date.today).order('published_at DESC')
   end
 
+  def self.recently_published
+    BlogPost.approved.where('published_at <= ?', Date.today - 7)
+  end
+
   def approved?
     self.approved ? 'Yes' : 'No'
   end
 
   def self.generate_blog_post!
-    post_section = Section.all.sample
+    recent_books = Book.with_recent_posts
+    post_section = Book.all.reject { |book| recent_books.include?(book) }.flat_map(&:sections).sample
     post_title = "#{post_section.book.author.full_name}, #{post_section.book.title}, SECTION: #{post_section.position} "
     if BlogPost.find_by(section: post_section)
       BlogPost.generate_blog_post!
