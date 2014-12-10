@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   include FriendlyId
+  mount_uploader :content_text, BookContentUploader
   friendly_id :author_and_title, use: [:slugged, :finders]
+  after_create :create_from_txt
   belongs_to :author
   has_many :sections, dependent: :destroy
   has_many :blog_posts, through: :sections
@@ -12,38 +14,6 @@ class Book < ActiveRecord::Base
 
   def author_and_title
     "#{author.full_name}, #{title}"
-  end
-
-  def self.create_from_txt!(text_file)
-    # expects text file with book number in title
-    # grab title, author, and content for book
-    # text_file = "/Users/dankleiman/Downloads/pg#{book_number}.txt"
-    text = ""
-    book_number = text_file.original_filename.match(/pg(.*).txt/)[1]
-    puts "Opening source file: #{text_file.original_filename}"
-    @title = ''
-    @author = ''
-    File.open(text_file.tempfile).each do |line|
-      @title = line.split("Title: ").last if line.start_with?("Title:")
-      @author = line.split("Author: ").last if line.start_with?("Author:")
-      text += line
-    end
-    text.strip!
-
-    # save book and author info
-    Book.transaction do
-      begin
-        author = Author.find_or_create_by(full_name: @author.strip)
-        puts "AUTHOR: #{author.full_name}"
-        book = Book.find_or_create_by(title: @title.strip, author: author)
-        puts "BOOK: #{book.title}"
-        book.update_attributes(content: text, gutenberg_id: book_number.to_i)
-        book.regenerate_sections!
-        puts "Created #{book.title} by #{book.author.full_name}"
-      rescue => e
-        raise e.message
-      end
-    end
   end
 
   def self.generate_sections
@@ -140,5 +110,15 @@ class Book < ActiveRecord::Base
       text book_content
 
     end
+  end
+
+  private
+
+  def create_from_txt
+    text_file = self.content_text.file.path
+    text = File.read(text_file)
+    book_number = text_file.match(/pg(.*).txt/)[1]
+    self.update_attributes(content: text, gutenberg_id: book_number.to_i)
+    self.regenerate_sections!
   end
 end

@@ -16,9 +16,21 @@ class BooksController < ApplicationController
   end
 
   def create
-    Book.create_from_txt!(params[:book][:file])
-    flash[:notice] = "Successfully created new book."
-    redirect_to admin_index_books_path
+    # assign file to new book
+    # book_content = BookContentUploader.new
+    # book_content.store!(params[:book][:file])
+
+    # params[:book][:content_text] = book_content
+    author = Author.find_or_create_by(full_name: params[:book][:author])
+    params[:book][:author_id] = author.id
+    book = Book.create(book_params)
+    if book.save
+      flash[:notice] = "Successfully created new book."
+      redirect_to admin_index_books_path
+    else
+      flash[:alert] = "Could not create book."
+      render :new
+    end
   end
 
   def show
@@ -74,7 +86,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :content, :approved)
+    params.require(:book).permit(:title, :author_id, :content_text)
   end
 
 end
