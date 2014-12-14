@@ -1,0 +1,13 @@
+<h2>Quiz Questions</h2>
+
+<% @quiz_questions.each do |question| %>
+  <h3>Question <%= question.id %></h3>
+  <p><%= simple_format(question.preview) %></p>
+  <h4>Answers</h4>
+  <ul>
+    <% question.answers.each do |answer| %>
+      <li <% if answer.correct == true %> style="font-weight:bold;" <% end %> ><%= answer.answer %></li>
+    <% end %>
+  </ul>
+<% end %>
+

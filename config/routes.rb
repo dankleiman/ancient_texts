@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       post :subscribe
     end
   end
+  resources :quiz_questions
+  resources :answers
 
   get "sitemap.xml" => "home#sitemap", format: :xml, as: :sitemap
   get "robots.txt" => "home#robots", format: :text, as: :robots

@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209155439) do
+ActiveRecord::Schema.define(version: 20141214135742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: true do |t|
+    t.string   "answer"
+    t.integer  "quiz_question_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authors", force: true do |t|
     t.string "full_name"
@@ -66,6 +74,17 @@ ActiveRecord::Schema.define(version: 20141209155439) do
     t.string   "image_url"
     t.string   "detail_page_url"
     t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quiz_questions", force: true do |t|
+    t.text     "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quizzes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
