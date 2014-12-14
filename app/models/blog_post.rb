@@ -5,6 +5,7 @@ class BlogPost < ActiveRecord::Base
   belongs_to :section
   has_one :book, through: :section
   self.per_page = 5
+  after_save :generate_quiz_question
 
   def self.approved
     BlogPost.where(approved: true)
@@ -59,5 +60,14 @@ class BlogPost < ActiveRecord::Base
       line_count += 1
     end
     preview
+  end
+
+  private
+
+  def generate_quiz_question
+    if self.approved and !QuizQuestion.where("question LIKE '%#{self.preview}%'").present?
+      puts "CREATING NEW QUIZ QUESTION"
+      QuizQuestion.create_from_blog_post!(self)
+    end
   end
 end
