@@ -5,7 +5,7 @@ class BlogPost < ActiveRecord::Base
   belongs_to :section
   has_one :book, through: :section
   self.per_page = 5
-  after_save :generate_quiz_question
+  # after_save :generate_quiz_question
 
   def self.approved
     BlogPost.where(approved: true)
